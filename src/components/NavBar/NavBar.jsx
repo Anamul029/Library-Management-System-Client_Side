@@ -9,6 +9,13 @@ const NavBar = () => {
     const navlinks = <>
         <li><NavLink to="/">Home</NavLink></li>
         <li><NavLink to="/register">Register</NavLink></li>
+        {
+            user&&<>
+             <li><NavLink to="/addBooks">Add Books</NavLink></li>
+             <li><NavLink to="/allBooks">All Books</NavLink></li>
+             <li><NavLink to="/borrow">Borrowed Books</NavLink></li>
+            </>
+        }
     </>
     // logout
     const handleLogOut=()=>{
@@ -38,7 +45,7 @@ const NavBar = () => {
                         {navlinks}
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl md:text-2xl text-blue-900">Library Management</a>
+                <a className="btn btn-ghost text-sm -ml-6 md:text-2xl md:ml-0 text-blue-900">Library Management</a>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
@@ -49,7 +56,7 @@ const NavBar = () => {
                 {
                     user ? <>
                         <div className="flex gap-2 justify-center items-center">
-                            <h5 className="text-sm ml-3">{user.displayName}</h5>
+                            {/* <h5 className="text-sm ml-3">{user.displayName}</h5> */}
                             <div className="avatar">
                                 <div className="w-12 rounded-full">
                                     <img src={user.photoURL}/>
