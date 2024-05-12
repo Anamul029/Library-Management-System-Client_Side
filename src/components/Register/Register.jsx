@@ -1,11 +1,53 @@
+import { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { AuthContext } from "../Provider/AuthProvider";
+import Swal from "sweetalert2";
+import { updateProfile } from "firebase/auth";
 
 // onSubmit={handleRegister}
 const Register = () => {
+    const { createUser } = useContext(AuthContext)
+    const handleRegister = e => {
+        e.preventDefault();
+        const name = e.target.name.value;
+        const email = e.target.email.value;
+        const photo = e.target.photoURL;
+        const password = e.target.password.value;
+        const info = { name, email, photo, password }
+        console.log(info)
+        // registration system
+        createUser(email, password)
+            .then(res => {
+                console.log(res.user)
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Successfully registration complete",
+                    showConfirmButton: false,
+                    timer: 1500
+
+                });
+                // update profile
+                updateProfile(res.user, {
+                    displayName: name,
+                    photoURL: photo,
+                })
+
+            })
+            .catch(error => {
+                console.log(error)
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Something went wrong!Please valid information.",
+                    
+                  });
+            })
+    }
     return (
         <div className="hero min-h-screen bg-base-200">
             <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-                <form  className="card-body">
+                <form onSubmit={handleRegister} className="card-body">
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text">Name</span>
