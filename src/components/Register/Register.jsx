@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 import Swal from "sweetalert2";
 import { updateProfile } from "firebase/auth";
+// import { updateProfile } from "firebase/auth";
 
 // onSubmit={handleRegister}
 const Register = () => {
@@ -11,14 +12,15 @@ const Register = () => {
         e.preventDefault();
         const name = e.target.name.value;
         const email = e.target.email.value;
-        const photo = e.target.photoURL;
+        const photo = e.target.photo.value;
         const password = e.target.password.value;
         const info = { name, email, photo, password }
         console.log(info)
         // registration system
         createUser(email, password)
             .then(res => {
-                console.log(res.user)
+                const result=res.user;
+                console.log(result)
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
@@ -28,7 +30,7 @@ const Register = () => {
 
                 });
                 // update profile
-                updateProfile(res.user, {
+                updateProfile(result, {
                     displayName: name,
                     photoURL: photo,
                 })
@@ -64,7 +66,7 @@ const Register = () => {
                         <label className="label">
                             <span className="label-text">PhotoURL</span>
                         </label>
-                        <input type="text" name="photoURL" placeholder="photoURL" className="input input-bordered" required />
+                        <input type="text" name="photo" placeholder="photoURL" className="input input-bordered" required />
                     </div>
                     <div className="form-control">
                         <label className="label">

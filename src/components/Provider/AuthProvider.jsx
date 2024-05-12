@@ -36,7 +36,7 @@ const AuthProvider = ({children}) => {
         return ()=>{
             unSubscribe();
         }
-    },[user])
+    },[])
 
     const authInfo={user,loading,createUser,userLogin,googleLogin,logOut}
     return (

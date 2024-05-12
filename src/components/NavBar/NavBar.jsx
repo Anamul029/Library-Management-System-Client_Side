@@ -9,13 +9,6 @@ const NavBar = () => {
     const navlinks = <>
         <li><NavLink to="/">Home</NavLink></li>
         <li><NavLink to="/register">Register</NavLink></li>
-        {/* <li><NavLink to="/login">Login</NavLink></li> */}
-        {/* {
-            user&&<>
-             <li><NavLink to="/addItem">Add Craft Item</NavLink></li>
-             <li><NavLink to="/myArt">My Art&Craft List</NavLink></li>
-            </>
-        } */}
     </>
     // logout
     const handleLogOut=()=>{
@@ -45,7 +38,7 @@ const NavBar = () => {
                         {navlinks}
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl md:text-2xl text-blue-900">Art & Craft Store</a>
+                <a className="btn btn-ghost text-xl md:text-2xl text-blue-900">Library Management</a>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
