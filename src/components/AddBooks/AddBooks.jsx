@@ -1,9 +1,9 @@
-import { useContext } from "react";
-import { AuthContext } from "../Provider/AuthProvider";
+
+import axios from "axios";
 
 
 const AddBooks = () => {
-    const {user}=useContext(AuthContext);
+    
     const handleAdd = (e) => {
         e.preventDefault();
         const image = e.target.image.value;
@@ -20,7 +20,32 @@ const AddBooks = () => {
       
        
         const information = { image, bookname, subcategory, description, author, rating, customization, processing_time, quantity }
-        console.log(information);
+        // console.log(information);
+
+        axios.post('http://localhost:5000/books',information)
+        .then(res=>{
+            const data=res.data;
+            console.log(data)
+            if(data.insertedId){
+                alert('book added successfully')
+            }
+        })
+
+        // post data to the database
+        // fetch('http://localhost:5000/bo',{
+        //     method:'POST',
+        //     headers:{
+        //         'content-type':'application/json'
+        //     },
+        //     body:JSON.stringify(information)
+        // })
+        // .then(res=>res.json())
+        // .then(data=>{
+        //     console.log(data)
+        //     if(data.insertedId){
+        //         alert('book added successfully')
+        //     }
+        // })
     }
     return (
         <div>

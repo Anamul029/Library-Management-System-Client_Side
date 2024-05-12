@@ -5,34 +5,34 @@ import Swal from "sweetalert2";
 
 
 const NavBar = () => {
-    const{user,logOut}=useContext(AuthContext)
+    const { user, logOut } = useContext(AuthContext)
     const navlinks = <>
         <li><NavLink to="/">Home</NavLink></li>
         <li><NavLink to="/register">Register</NavLink></li>
         {
-            user&&<>
-             <li><NavLink to="/addBooks">Add Books</NavLink></li>
-             <li><NavLink to="/allBooks">All Books</NavLink></li>
-             <li><NavLink to="/borrow">Borrowed Books</NavLink></li>
+            user && <>
+                <li><NavLink to="/addBooks">Add Books</NavLink></li>
+                <li><NavLink to="/allBooks">All Books</NavLink></li>
+                <li><NavLink to="/borrow">Borrowed Books</NavLink></li>
             </>
         }
     </>
     // logout
-    const handleLogOut=()=>{
+    const handleLogOut = () => {
         logOut()
-        .then(res=>{
-            console.log(res)
-            Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: "Successfully LogOut",
-                showConfirmButton: false,
-                timer: 1500
-            });
-        })
-        .catch(error=>{
-            console.log(error)
-        })
+            .then(res => {
+                console.log(res)
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Successfully LogOut",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }
     return (
         <div className="navbar bg-base-100">
@@ -56,18 +56,21 @@ const NavBar = () => {
                 {
                     user ? <>
                         <div className="flex gap-2 justify-center items-center">
-                            {/* <h5 className="text-sm ml-3">{user.displayName}</h5> */}
-                            <div className="avatar">
-                                <div className="w-12 rounded-full">
-                                    <img src={user.photoURL}/>
+                            <div className="flex flex-col justify-center items-center mt-3">
+                                <div className="avatar">
+                                    <div className="w-12 rounded-full">
+                                        <img src={user.photoURL} />
+                                    </div>
                                 </div>
+                                <h5 className="text-sm ml-3">{user.displayName}</h5>
                             </div>
+
                             <a onClick={handleLogOut} className="btn">LogOut</a>
                         </div>
 
                     </> :
                         <>
-                             <a  className="btn"><NavLink to="/login">Login</NavLink></a>
+                            <a className="btn"><NavLink to="/login">Login</NavLink></a>
                         </>
                 }
 

@@ -14,10 +14,12 @@ import AddBooks from './components/AddBooks/AddBooks.jsx';
 import AllBooks from './components/AllBooks/AllBooks.jsx';
 import BorrowBooks from './components/BorrowBooks/BorrowBooks.jsx';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute.jsx';
+import ErrorPage from './components/error page/ErrorPage.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
+    errorElement:<ErrorPage></ErrorPage>,
     children: [
       {
         path: '/',
