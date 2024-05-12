@@ -10,6 +10,10 @@ import Home from './components/Home/Home.jsx';
 import Register from './components/Register/Register.jsx';
 import Login from './components/Login/Login.jsx';
 import AuthProvider from './components/Provider/AuthProvider.jsx';
+import AddBooks from './components/AddBooks/AddBooks.jsx';
+import AllBooks from './components/AllBooks/AllBooks.jsx';
+import BorrowBooks from './components/BorrowBooks/BorrowBooks.jsx';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -26,6 +30,18 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: <Login></Login>,
+      },
+      {
+        path:'/addBooks',
+        element:<PrivateRoute><AddBooks></AddBooks></PrivateRoute>,
+      },
+      {
+        path:'allBooks',
+        element:<PrivateRoute><AllBooks></AllBooks></PrivateRoute>,
+      },
+      {
+        path:'borrow',
+        element:<PrivateRoute><BorrowBooks></BorrowBooks></PrivateRoute>,
       }
     ]
   },
