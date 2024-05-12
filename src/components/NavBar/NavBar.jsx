@@ -1,7 +1,11 @@
+import { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { AuthContext } from "../Provider/AuthProvider";
+import Swal from "sweetalert2";
 
 
 const NavBar = () => {
+    const{user,logOut}=useContext(AuthContext)
     const navlinks = <>
         <li><NavLink to="/">Home</NavLink></li>
         <li><NavLink to="/register">Register</NavLink></li>
@@ -14,22 +18,22 @@ const NavBar = () => {
         } */}
     </>
     // logout
-    // const handleLogOut=()=>{
-    //     logOut()
-    //     .then(res=>{
-    //         console.log(res)
-    //         Swal.fire({
-    //             position: "top-end",
-    //             icon: "success",
-    //             title: "Successfully LogOut",
-    //             showConfirmButton: false,
-    //             timer: 1500
-    //         });
-    //     })
-    //     .catch(error=>{
-    //         console.log(error)
-    //     })
-    // }
+    const handleLogOut=()=>{
+        logOut()
+        .then(res=>{
+            console.log(res)
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Successfully LogOut",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        })
+        .catch(error=>{
+            console.log(error)
+        })
+    }
     return (
         <div className="navbar bg-base-100">
             <div className="navbar-start">
@@ -49,7 +53,7 @@ const NavBar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                {/* {
+                {
                     user ? <>
                         <div className="flex gap-2 justify-center items-center">
                             <h5 className="text-sm ml-3">{user.displayName}</h5>
@@ -65,9 +69,9 @@ const NavBar = () => {
                         <>
                              <a  className="btn"><NavLink to="/login">Login</NavLink></a>
                         </>
-                } */}
+                }
 
-                <a className="btn"><NavLink to="/login">Login</NavLink></a>
+                {/* <a className="btn"><NavLink to="/login">Login</NavLink></a> */}
 
             </div>
         </div>
