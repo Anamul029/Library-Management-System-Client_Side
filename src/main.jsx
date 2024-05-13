@@ -15,6 +15,7 @@ import AllBooks from './components/AllBooks/AllBooks.jsx';
 import BorrowBooks from './components/BorrowBooks/BorrowBooks.jsx';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute.jsx';
 import ErrorPage from './components/error page/ErrorPage.jsx';
+import AllSubBooks from './components/AllSubBooks/AllSubBooks.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -44,6 +45,11 @@ const router = createBrowserRouter([
       {
         path:'borrow',
         element:<PrivateRoute><BorrowBooks></BorrowBooks></PrivateRoute>,
+      },
+      {
+        path:'books/:category',
+        element:<PrivateRoute><AllSubBooks></AllSubBooks></PrivateRoute>,
+        loader:()=>fetch('http://localhost:5000/books')
       }
     ]
   },

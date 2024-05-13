@@ -1,5 +1,6 @@
 
 import axios from "axios";
+import Swal from "sweetalert2";
 
 
 const AddBooks = () => {
@@ -27,7 +28,14 @@ const AddBooks = () => {
             const data=res.data;
             console.log(data)
             if(data.insertedId){
-                alert('book added successfully')
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Successfully Data added to database",
+                    showConfirmButton: false,
+                    timer: 1500
+    
+                });
             }
         })
 

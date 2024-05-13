@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 
 
 const CaregoryBookCard = ({ book }) => {
@@ -7,9 +8,11 @@ const CaregoryBookCard = ({ book }) => {
             <figure><img className="md:w-[400px] md:h-[250px]" src={image_url} alt="Shoes" /></figure>
             <div className="card-body">
                 <h2 className="card-title mx-auto">Categorty:{category_name}</h2>
-               
+
                 <div className="card-actions justify-center">
-                    <button className="btn btn-primary">View Details</button>
+                    <NavLink to={`/books/${category_name}`}>
+                        <button className="btn btn-primary" >View Details</button>
+                    </NavLink>
                 </div>
             </div>
         </div>
