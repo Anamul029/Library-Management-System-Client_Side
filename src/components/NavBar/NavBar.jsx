@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 
 const NavBar = () => {
     const { user, logOut } = useContext(AuthContext)
+    // console.log(user.photoURL)
     const navlinks = <>
         <li><NavLink to="/">Home</NavLink></li>
         <li><NavLink to="/register">Register</NavLink></li>
