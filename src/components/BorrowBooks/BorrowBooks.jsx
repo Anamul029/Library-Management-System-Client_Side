@@ -7,10 +7,10 @@ const BorrowBooks = () => {
     const {user}=useContext(AuthContext)
     const [update,setUpdate]=useState([])
     useEffect(()=>{
-        fetch(`http://localhost:5000/borrow-user/${user.email}`)
+        fetch(`http://localhost:5000/borrow-user/${user?.email}`)
         .then(res=>res.json())
         .then(data=>setUpdate(data))
-    },[])
+    },[update])
     return (
         <div>
             <h3 className="text-2xl font-semibold text-center text-blue-800 bg-lime-400 p-3 rounded-xl w-3/5 mx-auto mb-12">Total number of book you have to borrowed:{update.length}</h3>
