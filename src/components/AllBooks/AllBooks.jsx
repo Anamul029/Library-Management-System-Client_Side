@@ -10,7 +10,8 @@ const AllBooks = () => {
         .then(res=>{
             setBooks(res.data)
         })
-    },[])
+    },[]);
+    // console.log(books)
     return (
         <div>
             <h3>see all the books here:{books.length}</h3>

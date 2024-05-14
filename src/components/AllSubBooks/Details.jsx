@@ -1,19 +1,44 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useLoaderData, useParams } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
+import axios from "axios";
 
 
 const Details = () => {
-    const {user}=useContext(AuthContext)
+    const { user } = useContext(AuthContext)
     const book = useLoaderData();
     const id = useParams()
     const ID = id._id;
     const info = book.find(info => info._id === ID)
     console.log(info)
     const { image, _id, stockStatus, quantity, author, customization, processing_time, rating, subcategory, bookname } = info;
-    
+    const [count, setCount] = useState(quantity)
+
+    const handleQuantity=()=>{
+        let quantity={quantity}-1;
+        setCount(quantity)
+    }
+
     // add borrow book information to database
-    
+   
+    const handleBorrowBook = e => {
+        
+        e.preventDefault();
+        const date = e.target.date.value;
+        const name = user.displayName;
+        const email = user.email;
+        const borrowInfo = { date, name, email,image,bookname,subcategory }
+        console.log(date)
+        // console.log(borrowInfo)
+        axios.post('http://localhost:5000/borrow', borrowInfo)
+            .then(res => {
+                console.log(res.data)
+            })
+    }
+
+
+
+
     return (
 
         <div className="card mt-12 lg:card-side w-4/5 container mx-auto bg-base-100 shadow-xl">
@@ -24,7 +49,7 @@ const Details = () => {
                     <h3 className="mt-4 text-xl"><span className="font-semibold text-blue-800">Author:</span>{author}</h3>
                     <h3 className="mt-4 text-xl"><span className="font-semibold text-blue-800">Category:</span>{subcategory}</h3>
                     <h3 className="mt-4 text-xl"><span className="font-semibold text-blue-800">Rating:</span>{rating}</h3>
-                    <h3 className="mt-4 text-xl"><span className="font-semibold text-blue-800">Quantity:</span>{quantity}</h3>
+                    <h3 className="mt-4 text-xl"><span className="font-semibold text-blue-800">Quantity:</span>{count}</h3>
                     <h3 className="mt-4 text-xl"><span className="font-semibold text-blue-800">Customization:</span>{customization}</h3>
                     <h3 className="mt-4 text-xl"><span className="font-semibold text-blue-800">Process Time:</span>{processing_time}</h3>
                     <h3 className="mt-4 text-xl"><span className="font-semibold text-blue-800">Stock Status:</span>{stockStatus}</h3>
@@ -35,7 +60,7 @@ const Details = () => {
                     <button id="borrow" className="btn" onClick={() => document.getElementById('my_modal_1').showModal()}>Borrow Book</button>
                     <dialog id="my_modal_1" className="modal">
                         <div className="modal-box">
-                            <form>
+                            <form onSubmit={handleBorrowBook}>
                                 {/* input one */}
                                 <div className="form-control">
                                     <label className="label">
@@ -57,12 +82,12 @@ const Details = () => {
                                     </label>
                                     <input type="text" placeholder="Email" name="name" disabled className="input input-bordered" defaultValue={user.email} required />
                                 </div>
+                                <button onClick={handleQuantity} className="btn bg-green-400 my-6">Submit</button>
                             </form>
-                            <p className="py-4">Press ESC key or click the button below to close</p>
+                            <p className="py-4">Press ESC key or click the button below to close modal</p>
                             <div className="modal-action">
                                 <form method="dialog">
-                                    {/* if there is a button in form, it will close the modal */}
-                                    <button className="btn">Submit</button>
+                                    <button className="btn bg-red-600">Close</button>
                                 </form>
                             </div>
                         </div>
