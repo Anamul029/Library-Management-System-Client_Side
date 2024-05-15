@@ -3,10 +3,21 @@ import { useContext } from "react";
 import CaregoryBook from "./CaregoryBook";
 import Slider from "./Slider";
 import { AuthContext } from "../Provider/AuthProvider";
+import Swal from "sweetalert2";
 
 
 const Home = () => {
     const {user}=useContext(AuthContext)
+    const handlesave=(e)=>{
+        e.preventDefault()
+        Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Your valuable feedback is saved on database",
+            showConfirmButton: false,
+            timer: 1500
+          });
+    }
     return (
         <div className="">
             <Slider></Slider>
@@ -61,25 +72,14 @@ const Home = () => {
                 </div>
             </div>
             {/* user review section */}
-            {/* <section className="bg-lime-200">
-                <h2 className="font-semibold text-2xl text-center my-12 bg-orange-400 p-2 rounded-md">Please give your valuable feedback here.</h2>
-                <form className="my-8">
-                <div className="form-control">
-                        <label className="label">
-                            <span className="label-text font-semibold text-black">User Name</span>
-                        </label>
-                        <input type="text" defaultValue={user.displayName} placeholder="image url" className="input input-bordered" required />
-                    </div>
-                    <div className="form-control">
-                        <label className="label">
-                            <span className="label-text font-semibold text-black">Image URL</span>
-                        </label>
-                        <input type="text" defaultValue={user.email} placeholder="email" className="input input-bordered" required />
-                    </div>
-                    
-                      <textarea className="w-full my-3" name="feedback" id=""></textarea>
+            {/* second extra section */}
+            <div className="my-6 md:my-16">
+                <h3 className="text-2xl font-semibold text-center my-6">Please sent Your important feedback for our website  </h3>
+                <form onSubmit={handlesave}>
+                    <textarea className="border-2 border-solid w-full border-black" name="feedback" id="" cols="50" rows="10"></textarea>
+                    <button className="btn btn-primary bg-green-600 w-full">Submit Your feedback</button>
                 </form>
-            </section> */}
+            </div>
         </div>
     );
 };
