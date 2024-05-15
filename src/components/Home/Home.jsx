@@ -1,13 +1,10 @@
 
-// import { useContext } from "react";
 import CaregoryBook from "./CaregoryBook";
 import Slider from "./Slider";
-// import { AuthContext } from "../Provider/AuthProvider";
 import Swal from "sweetalert2";
 
 
 const Home = () => {
-    // const {user}=useContext(AuthContext)
     const handlesave=(e)=>{
         e.preventDefault()
         Swal.fire({

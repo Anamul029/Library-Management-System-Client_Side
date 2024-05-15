@@ -47,19 +47,9 @@ const Details = () => {
                 console.log(res.data)
             })
 
-            // update quantity value
-            // fetch(`https://library-management-server-orcin.vercel.app/books/${ID}`,{
 
 
-            // })
-            // // http://localhost:5000/books/decrement/${id}
-            // .then(res=>res.json())
-            // .then(data=>{
-            //     console.log(data);
-            //     if(data.modifiedCount>0){
-            //         alert('update quantity successfully')
-            //     }
-            // })
+         
     }
     // // handle quantity update
     // console.log(update-1)
