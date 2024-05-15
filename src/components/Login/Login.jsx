@@ -1,14 +1,13 @@
 import { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink,useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 import Swal from "sweetalert2";
 
 
 const Login = () => {
     const {userLogin,googleLogin}=useContext(AuthContext)
-    // onSubmit={handleLogin}
-    // onClick={handleGoogleLogin}
-    // onClick={handleGitHubLogin}
+   const location=useLocation()
+   const navigate=useNavigate()
     const handleLogin = e => {
         e.preventDefault();
         const email=e.target.email.value;
@@ -18,6 +17,7 @@ const Login = () => {
         userLogin(email,password)
         .then(res=>{
             console.log(res.user)
+            navigate(location?.state?location?.state:'/')
             Swal.fire({
                 position: "top-end",
                 icon: "success",
@@ -42,6 +42,7 @@ const Login = () => {
      const handleGoogleLogin=()=>{
         googleLogin()
         .then(res=>{
+            navigate(location?.state?location?.state:'/')
             console.log(res.user)
         })
         .catch(error=>{
@@ -76,8 +77,7 @@ const Login = () => {
                     </form>
                     {/* another login part */}
                     <div className="flex flex-col gap-2 mx-auto">
-                        <button onClick={handleGoogleLogin} className="btn bg-yellow-400 w-auto mx-auto">Google Login</button>
-                        <button className="btn bg-red-400 w-auto mx-auto mb-3">Github Login Login</button>
+                        <button onClick={handleGoogleLogin} className="btn mb-4 bg-yellow-400 w-auto mx-auto">Google Login</button>
                     </div>
                 </div>
             </div>

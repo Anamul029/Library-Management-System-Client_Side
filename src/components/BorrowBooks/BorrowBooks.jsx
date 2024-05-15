@@ -7,7 +7,7 @@ const BorrowBooks = () => {
     const {user}=useContext(AuthContext)
     const [update,setUpdate]=useState([])
     useEffect(()=>{
-        fetch(`http://localhost:5000/borrow-user/${user?.email}`)
+        fetch(`https://library-management-server-orcin.vercel.app/borrow-user/${user?.email}`)
         .then(res=>res.json())
         .then(data=>setUpdate(data))
     },[update])

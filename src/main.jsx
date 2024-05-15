@@ -51,12 +51,12 @@ const router = createBrowserRouter([
       {
         path:'books/:category',
         element:<PrivateRoute><AllSubBooks></AllSubBooks></PrivateRoute>,
-        loader:()=>fetch('http://localhost:5000/books')
+        loader:()=>fetch('https://library-management-server-orcin.vercel.app/books')
       },
       {
         path:'/viewDetails/:_id',
         element:<PrivateRoute><Details></Details></PrivateRoute>,
-        loader:()=>fetch('http://localhost:5000/books')
+        loader:()=>fetch('https://library-management-server-orcin.vercel.app/books')
 
       },
       {

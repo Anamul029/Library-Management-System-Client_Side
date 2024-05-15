@@ -6,7 +6,7 @@ import BookCard from "./BookCard";
 const AllBooks = () => {
     const [books,setBooks]=useState([])
     useState(()=>{
-        axios.get('http://localhost:5000/books')
+        axios.get('https://library-management-server-orcin.vercel.app/books')
         .then(res=>{
             setBooks(res.data)
         })

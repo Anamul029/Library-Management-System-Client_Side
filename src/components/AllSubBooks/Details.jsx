@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { useLoaderData, useParams } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 
 const Details = () => {
@@ -10,34 +11,58 @@ const Details = () => {
     const id = useParams()
     const ID = id._id;
     const info = book.find(info => info._id === ID)
-    console.log(info)
-    const { image, _id, stockStatus, quantity, author, customization, processing_time, rating, subcategory, bookname } = info;
-    const [count, setCount] = useState(quantity)
-
-    const handleQuantity=()=>{
-        let quantity={quantity}-1;
-        setCount(quantity)
-    }
+    // console.log(info)
+    const { image, _id, stockStatus,  author, customization, processing_time, rating, subcategory, bookname } = info;
+    let{quantity}=info;
+    // let [update,setUpdate]=useState(quantity)
+    // var Quantity = quantity;
 
     // add borrow book information to database
-   
+
     const handleBorrowBook = e => {
-        
         e.preventDefault();
         const date = e.target.date.value;
         const name = user.displayName;
         const email = user.email;
-        const borrowInfo = { date, name, email,image,bookname,subcategory }
-        console.log(date)
-        // console.log(borrowInfo)
-        axios.post('http://localhost:5000/borrow', borrowInfo)
+        const borrowInfo = { date, name, email, image, bookname, subcategory }
+
+        axios.post('https://library-management-server-orcin.vercel.app/borrow', borrowInfo)
             .then(res => {
                 console.log(res.data)
+                if (res.data.insertedId) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Successfully Data added",
+                        showConfirmButton: false,
+                        timer: 1500
+
+                    });
+                }
+                // setUpdate(update-1)
             })
+
+            axios.patch(`https://library-management-server-orcin.vercel.app/books/${ID}`,{quantity})
+            .then(res=>{
+                console.log(res.data)
+            })
+
+            // update quantity value
+            // fetch(`https://library-management-server-orcin.vercel.app/books/${ID}`,{
+
+
+            // })
+            // // http://localhost:5000/books/decrement/${id}
+            // .then(res=>res.json())
+            // .then(data=>{
+            //     console.log(data);
+            //     if(data.modifiedCount>0){
+            //         alert('update quantity successfully')
+            //     }
+            // })
     }
-
-
-
+    // // handle quantity update
+    // console.log(update-1)
 
     return (
 
@@ -49,7 +74,7 @@ const Details = () => {
                     <h3 className="mt-4 text-xl"><span className="font-semibold text-blue-800">Author:</span>{author}</h3>
                     <h3 className="mt-4 text-xl"><span className="font-semibold text-blue-800">Category:</span>{subcategory}</h3>
                     <h3 className="mt-4 text-xl"><span className="font-semibold text-blue-800">Rating:</span>{rating}</h3>
-                    <h3 className="mt-4 text-xl"><span className="font-semibold text-blue-800">Quantity:</span>{count}</h3>
+                    <h3 className="mt-4 text-xl"><span className="font-semibold text-blue-800">Quantity:</span>{quantity}</h3>
                     <h3 className="mt-4 text-xl"><span className="font-semibold text-blue-800">Customization:</span>{customization}</h3>
                     <h3 className="mt-4 text-xl"><span className="font-semibold text-blue-800">Process Time:</span>{processing_time}</h3>
                     <h3 className="mt-4 text-xl"><span className="font-semibold text-blue-800">Stock Status:</span>{stockStatus}</h3>
@@ -82,7 +107,7 @@ const Details = () => {
                                     </label>
                                     <input type="text" placeholder="Email" name="name" disabled className="input input-bordered" defaultValue={user.email} required />
                                 </div>
-                                <button onClick={handleQuantity} className="btn bg-green-400 my-6">Submit</button>
+                                <button className="btn bg-green-400 my-6">Submit</button>
                             </form>
                             <p className="py-4">Press ESC key or click the button below to close modal</p>
                             <div className="modal-action">

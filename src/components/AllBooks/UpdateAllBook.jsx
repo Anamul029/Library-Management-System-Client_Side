@@ -22,7 +22,7 @@ const UpdateAllBook = () => {
         const info = { image, bookname, subcategory, author, rating }
         console.log(info)
         // update data 
-        axios.put(`http://localhost:5000/books/${ID}`, info)
+        axios.put(`https://library-management-server-orcin.vercel.app/books/${ID}`, info)
             .then(res => {
                 const data = res.data;
                 console.log(data)
@@ -42,7 +42,8 @@ const UpdateAllBook = () => {
 
     return (
         <div>
-            <form onSubmit={handleUpdateData}>
+            <h3 className="text-2xl font-semibold text-center mb-8">Update your information here</h3>
+            <form onSubmit={handleUpdateData} className="bg-lime-200 p-6 rounded-xl">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {/* input one */}
                     <div className="form-control">

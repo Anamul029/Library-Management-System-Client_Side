@@ -14,8 +14,19 @@ const Register = () => {
         const email = e.target.email.value;
         const photo = e.target.photo.value;
         const password = e.target.password.value;
-        const info = { name, email, photo, password }
-        console.log(info)
+        // const info = { name, email, photo, password }
+        // console.log(info)
+        let passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).+$/
+
+          if(!passwordRegex.test(password)){
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Something went wrong!Please provide a uppercase & a special charecter in your password.",
+                
+              });
+            return;
+        }
         // registration system
         createUser(email, password)
             .then(res => {

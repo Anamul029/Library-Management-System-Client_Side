@@ -17,7 +17,7 @@ const BorrowBookCard = ({ data }) => {
             confirmButtonText: "Yes, return it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`http://localhost:5000/borrow/${id}`)
+                axios.delete(`https://library-management-server-orcin.vercel.app/borrow/${id}`)
                     .then(res => {
                         console.log(res.data)
                     })
@@ -37,7 +37,7 @@ const BorrowBookCard = ({ data }) => {
                 <h2><span className="font-semibold text-white">Name:</span>{bookname}</h2>
                 <h2><span className="font-semibold text-white">Catecory:</span>{subcategory}</h2>
                 <h2><span className="font-semibold text-white">Return Date:</span>{date}</h2>
-                <p>If a dog chews shoes whose shoes does he choose?</p>
+                <p>If you return your book?please click the return button.</p>
                 <div className="card-actions justify-end">
                     <button onClick={() => handleReturn(_id)} className="btn btn-primary bg-orange-600">Return Book</button>
                 </div>

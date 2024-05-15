@@ -2,11 +2,11 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import CaregoryBookCard from "./CaregoryBookCard";
 
-
+// {withCredentials:true}
 const CaregoryBook = () => {
     const [books, setBooks] = useState([])
     useEffect(() => {
-        axios.get('http://localhost:5000/services')
+        axios.get('https://library-management-server-orcin.vercel.app/services',{withCredentials:true})
             .then(res => {
                 //    console.log(res.data)
                 setBooks(res.data)

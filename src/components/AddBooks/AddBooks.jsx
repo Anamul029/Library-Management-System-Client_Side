@@ -23,7 +23,7 @@ const AddBooks = () => {
         const information = { image, bookname, subcategory, description, author, rating, customization, processing_time, quantity }
         // console.log(information);
 
-        axios.post('http://localhost:5000/books',information)
+        axios.post('https://library-management-server-orcin.vercel.app/books',information)
         .then(res=>{
             const data=res.data;
             console.log(data)
@@ -40,7 +40,7 @@ const AddBooks = () => {
         })
 
         // post data to the database
-        // fetch('http://localhost:5000/bo',{
+        // fetch('https://library-management-server-orcin.vercel.app/bo',{
         //     method:'POST',
         //     headers:{
         //         'content-type':'application/json'

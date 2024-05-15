@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 
 const BookCard = ({info}) => {
     const { image, _id,quantity,author, customization, description, processing_time, rating, subcategory } = info;
-    console.log(info)
-    const handleDelete=(id)=>{
-        console.log(id)
-    }
+    // console.log(info)
+    // const handleDelete=(id)=>{
+    //     console.log(id)
+    // }
 
     return (
         <div className="card card-compact md:h-[600px] w-auto bg-lime-200 shadow-xl">
