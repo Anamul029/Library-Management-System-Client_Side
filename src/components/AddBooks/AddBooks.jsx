@@ -26,7 +26,7 @@ const AddBooks = () => {
         axios.post('https://library-management-server-orcin.vercel.app/books',information)
         .then(res=>{
             const data=res.data;
-            console.log(data)
+            // console.log(data)
             if(data.insertedId){
                 Swal.fire({
                     position: "top-end",

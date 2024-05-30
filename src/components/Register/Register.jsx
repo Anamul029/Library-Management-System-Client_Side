@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 import Swal from "sweetalert2";
 import { updateProfile } from "firebase/auth";
@@ -8,6 +8,8 @@ import { updateProfile } from "firebase/auth";
 // onSubmit={handleRegister}
 const Register = () => {
     const { createUser } = useContext(AuthContext)
+    const location=useLocation();
+    const navigate=useNavigate();
     const handleRegister = e => {
         e.preventDefault();
         const name = e.target.name.value;
@@ -31,7 +33,8 @@ const Register = () => {
         createUser(email, password)
             .then(res => {
                 const result=res.user;
-                console.log(result)
+                // console.log(result)
+                navigate(location?.state?location?.state:'/')
                 Swal.fire({
                     position: "top-end",
                     icon: "success",

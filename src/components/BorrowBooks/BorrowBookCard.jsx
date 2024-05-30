@@ -19,7 +19,7 @@ const BorrowBookCard = ({ data }) => {
             if (result.isConfirmed) {
                 axios.delete(`https://library-management-server-orcin.vercel.app/borrow/${id}`)
                     .then(res => {
-                        console.log(res.data)
+                        // console.log(res.data)
                     })
                 Swal.fire({
                     title: "Returned!",

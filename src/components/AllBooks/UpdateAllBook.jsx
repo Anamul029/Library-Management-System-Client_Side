@@ -20,7 +20,7 @@ const UpdateAllBook = () => {
         const rating = e.target.rating.value;
         // console.log(image, bookname,subcategory, author,rating);
         const info = { image, bookname, subcategory, author, rating }
-        console.log(info)
+        // console.log(info)
         // update data 
         axios.put(`https://library-management-server-orcin.vercel.app/books/${ID}`, info)
             .then(res => {

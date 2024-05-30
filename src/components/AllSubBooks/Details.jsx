@@ -14,7 +14,7 @@ const Details = () => {
     // console.log(info)
     const { image, _id, stockStatus,  author, customization, processing_time, rating, subcategory, bookname } = info;
     let{quantity}=info;
-    // let [update,setUpdate]=useState(quantity)
+    let [update,setUpdate]=useState(quantity)
     // var Quantity = quantity;
 
     // add borrow book information to database
@@ -28,7 +28,8 @@ const Details = () => {
 
         axios.post('https://library-management-server-orcin.vercel.app/borrow', borrowInfo)
             .then(res => {
-                console.log(res.data)
+                setUpdate(quantity-1)
+                // console.log(res.data)
                 if (res.data.insertedId) {
                     Swal.fire({
                         position: "top-end",
@@ -44,7 +45,7 @@ const Details = () => {
 
             axios.patch(`https://library-management-server-orcin.vercel.app/books/${ID}`,{quantity})
             .then(res=>{
-                console.log(res.data)
+                // console.log(res.data)
             })
 
 
@@ -56,18 +57,18 @@ const Details = () => {
 
     return (
 
-        <div className="card mt-12 lg:card-side w-4/5 container mx-auto bg-base-100 shadow-xl">
+        <div className="card mt-12 lg:card-side w-full md:w-4/5 container mx-auto bg-base-100 shadow-xl">
             <figure><img className="md:h-[500px] md:w-[400px]" src={image} alt="Album" /></figure>
             <div className="card-body">
                 <div className="grid grid-cols-2 gap-6">
-                    <h2 className="mt-4 text-xl"><span className="font-semibold text-blue-800">Book Name:</span>{bookname}</h2>
-                    <h3 className="mt-4 text-xl"><span className="font-semibold text-blue-800">Author:</span>{author}</h3>
-                    <h3 className="mt-4 text-xl"><span className="font-semibold text-blue-800">Category:</span>{subcategory}</h3>
-                    <h3 className="mt-4 text-xl"><span className="font-semibold text-blue-800">Rating:</span>{rating}</h3>
-                    <h3 className="mt-4 text-xl"><span className="font-semibold text-blue-800">Quantity:</span>{quantity}</h3>
-                    <h3 className="mt-4 text-xl"><span className="font-semibold text-blue-800">Customization:</span>{customization}</h3>
-                    <h3 className="mt-4 text-xl"><span className="font-semibold text-blue-800">Process Time:</span>{processing_time}</h3>
-                    <h3 className="mt-4 text-xl"><span className="font-semibold text-blue-800">Stock Status:</span>{stockStatus}</h3>
+                    <h2 className="mt-4 md:text-xl"><span className="font-semibold text-blue-800">Book Name:</span>{bookname}</h2>
+                    <h3 className="mt-4 md:text-xl"><span className="font-semibold text-blue-800">Author:</span>{author}</h3>
+                    <h3 className="mt-4 md:text-xl"><span className="font-semibold text-blue-800">Category:</span>{subcategory}</h3>
+                    <h3 className="mt-4 md:text-xl"><span className="font-semibold text-blue-800">Rating:</span>{rating}</h3>
+                    <h3 className="mt-4 md:text-xl"><span className="font-semibold text-blue-800">Quantity:</span>{update}</h3>
+                    <h3 className="mt-4 md:text-xl"><span className="font-semibold text-blue-800">Customization:</span>{customization}</h3>
+                    <h3 className="mt-4 md:text-xl"><span className="font-semibold text-blue-800">Process Time:</span>{processing_time}</h3>
+                    <h3 className="mt-4 md:text-xl"><span className="font-semibold text-blue-800">Stock Status:</span>{stockStatus}</h3>
                     {/* <h3><span className="font-semibold text-blue-800">Process Time:</span>{processing_time}</h3> */}
                     <p className="col-span-2 md:w-[400px] lg:w-[500px] mt-4 justify-center">Science fiction often serves as a lens through which authors explore contemporary societal issues in a speculative context. Themes such as ethics, politics, environmental concerns, and human rights are often addressed in these narratives, prompting readers to reflect on the implications of current trends and decisions.</p>
                 </div>

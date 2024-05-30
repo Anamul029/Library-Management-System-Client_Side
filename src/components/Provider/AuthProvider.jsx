@@ -33,13 +33,13 @@ const AuthProvider = ({ children }) => {
             const userEmail = currentUser?.email || user.email;
             const loggedUser = { email: userEmail }
 
-            console.log(currentUser);
+            // console.log(currentUser);
 
             // if user exist token can genareted
             if (currentUser) {
                 axios.post('https://library-management-server-orcin.vercel.app/jwt', loggedUser, { withCredentials: true })
                     .then(res => {
-                        console.log('token response', res.data)
+                        // console.log('token response', res.data)
                         setLoading(false)
                         setUser(currentUser);
                     })

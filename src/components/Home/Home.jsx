@@ -1,11 +1,10 @@
-
 import CaregoryBook from "./CaregoryBook";
 import Slider from "./Slider";
 import Swal from "sweetalert2";
-
+import UserReview from "./UserReview";
 
 const Home = () => {
-    const handlesave=(e)=>{
+    const handlesave = (e) => {
         e.preventDefault()
         Swal.fire({
             position: "top-end",
@@ -13,7 +12,7 @@ const Home = () => {
             title: "Your valuable feedback is saved on database",
             showConfirmButton: false,
             timer: 1500
-          });
+        });
     }
     return (
         <div className="">
@@ -77,6 +76,9 @@ const Home = () => {
                     <button className="btn btn-primary bg-green-600 w-full">Submit Your feedback</button>
                 </form>
             </div>
+            {/* user review component */}
+            <UserReview></UserReview>
+           
         </div>
     );
 };
